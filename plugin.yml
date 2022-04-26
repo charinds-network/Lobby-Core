@@ -1,0 +1,5 @@
+name: Lobby
+main: charindo\lobby\Main
+version: 1.0.0
+api: 4.3.1
+author: charindo
