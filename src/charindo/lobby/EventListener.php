@@ -23,7 +23,7 @@ class EventListener implements Listener{
 		$event->setJoinMessage("");
 		$player = $event->getPlayer();
 		$name = $player->getName();
-		$player->sendForm(new SelectServerForm());
+		$player->sendForm(new SelectServerForm($this->database));
 	}
 
 	public function onQuit(PlayerQuitEvent $event) : void{
