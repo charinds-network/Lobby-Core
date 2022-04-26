@@ -28,7 +28,7 @@ class MySQL implements Database{
 
 	public function putSelectServer(UserSelectServerType $record){
 		$stmt = $this->connection->prepare("INSERT INTO `proxy_waiting_list` (`name`, `server`) VALUES (?, ?)");
-		$stmt->bind_param("is", $record->name, $record->server);
+		$stmt->bind_param("ss", $record->name, $record->server);
 		$stmt->execute();
 	}
 }
