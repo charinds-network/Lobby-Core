@@ -7,7 +7,6 @@ namespace charindo\lobby;
 use _PHPStan_c0c409264\Nette\InvalidStateException;
 use charindo\lobby\database\Database;
 use charindo\lobby\database\MySQL;
-use pocketmine\color\Color;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 
@@ -15,6 +14,8 @@ class Main extends PluginBase{
 
 	/** @var Database */
 	private $database;
+	/** @var EventListener */
+	private $eventListener;
 
 	public function onEnable() : void{
 		$config = new Config($this->getDataFolder() . "config.yml", Config::YAML, array(
@@ -36,5 +37,8 @@ class Main extends PluginBase{
 		}else{
 			$this->getLogger()->info("§aデータベースに接続しました");
 		}
+
+		$this->eventListener = new EventListener($this->database);
+		$this->getServer()->getPluginManager()->registerEvents($this->eventListener, $this);
 	}
 }
