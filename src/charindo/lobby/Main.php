@@ -7,6 +7,10 @@ namespace charindo\lobby;
 use _PHPStan_c0c409264\Nette\InvalidStateException;
 use charindo\lobby\database\Database;
 use charindo\lobby\database\MySQL;
+use charindo\lobby\item\ServerSelectClock;
+use pocketmine\item\ItemFactory;
+use pocketmine\item\ItemIdentifier;
+use pocketmine\item\ItemIds;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 
@@ -16,6 +20,11 @@ class Main extends PluginBase{
 	private $database;
 	/** @var EventListener */
 	private $eventListener;
+
+	public function initItems(){
+		$factory = ItemFactory::getInstance();
+		$factory->register(new ServerSelectClock(new ItemIdentifier(ItemIds::CLOCK, 0), "Server Select Clock"), true);
+	}
 
 	public function onEnable() : void{
 		$config = new Config($this->getDataFolder() . "config.yml", Config::YAML, array(
@@ -37,6 +46,8 @@ class Main extends PluginBase{
 		}else{
 			$this->getLogger()->info("§aデータベースに接続しました");
 		}
+
+		$this->initItems();
 
 		$this->eventListener = new EventListener($this->database);
 		$this->getServer()->getPluginManager()->registerEvents($this->eventListener, $this);

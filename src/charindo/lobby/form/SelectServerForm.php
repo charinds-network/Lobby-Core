@@ -9,7 +9,7 @@ use charindo\lobby\database\type\UserSelectServerType;
 use pocketmine\form\Form;
 use pocketmine\player\Player;
 
-class SelectServerForm implements Form{
+class SelectServerForm implements Form {
 
 	/** @var Database */
 	private $database;
@@ -18,16 +18,17 @@ class SelectServerForm implements Form{
 		$this->database = $database;
 	}
 
-	public function handleResponse(Player $player, $data) : void{
-		if($data === null){
+	public function handleResponse(Player $player, $data) : void {
+		if ($data === null) {
 			return;
 		}
 
 		$servers = ['main', 'pt'];
-		$this->database->putSelectServer(new UserSelectServerType($player->getName(), $servers[$data]));
+		$this->database->deleteSelectServerData($player->getName());
+		$this->database->putSelectServerData(new UserSelectServerType($player->getName(), $servers[$data]));
 	}
 
-	public function jsonSerialize(){
+	public function jsonSerialize() {
 		$servers = [""];
 		return [
 			'type' => 'form',

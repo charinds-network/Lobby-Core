@@ -6,10 +6,25 @@ namespace charindo\lobby\database;
 
 use charindo\lobby\database\type\UserSelectServerType;
 
-interface Database{
+interface Database {
+
+	/**
+	 * @return Database
+	 */
+	public static function getInstance() : Database;
+
+	/**
+	 * @return \mysqli
+	 */
+	public function getConnection() : \mysqli;
 
 	/**
 	 * @param UserSelectServerType $record
 	 */
-	public function putSelectServer(UserSelectServerType $record);
+	public function putSelectServerData(UserSelectServerType $record);
+
+	/**
+	 * @param string $name
+	 */
+	public function deleteSelectServerData(string $name);
 }

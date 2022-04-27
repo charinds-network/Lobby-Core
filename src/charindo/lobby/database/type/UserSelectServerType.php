@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace charindo\lobby\database\type;
 
-class UserSelectServerType{
+class UserSelectServerType {
 
 	/** @var string */
 	public $name;
@@ -15,7 +15,7 @@ class UserSelectServerType{
 	 * @param string $name
 	 * @param string $server
 	 */
-	public function __construct(string $name, string $server){
+	public function __construct(string $name, string $server) {
 		$this->name = $name;
 		$this->server = $server;
 	}
