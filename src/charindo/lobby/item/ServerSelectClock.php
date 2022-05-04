@@ -16,7 +16,7 @@ use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\player\Player;
 
 class ServerSelectClock extends Item {
-	public function onInteractBlock(Player $player, Block $blockReplace, Block $blockClicked, int $face, Vector3 $clickVector) : ItemUseResult {
+	public function onClickAir(Player $player, Vector3 $directionVector) : ItemUseResult {
 		if(isset($player->clickRestrictionTime) && $player->clickRestrictionTime <= microtime(true)){
 			$player->clickRestrictionTime = microtime(true) + 0.2;
 			$item = $player->getInventory()->getItemInHand();
