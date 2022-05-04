@@ -14,19 +14,19 @@ use pocketmine\item\ItemIds;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 
-class Main extends PluginBase{
+class Main extends PluginBase {
 
 	/** @var Database */
 	private $database;
 	/** @var EventListener */
 	private $eventListener;
 
-	public function initItems(){
+	public function initItems() {
 		$factory = ItemFactory::getInstance();
 		$factory->register(new ServerSelectClock(new ItemIdentifier(ItemIds::CLOCK, 0), "Server Select Clock"), true);
 	}
 
-	public function onEnable() : void{
+	public function onEnable() : void {
 		$config = new Config($this->getDataFolder() . "config.yml", Config::YAML, array(
 			"mysql" => [
 				"host" => "host",

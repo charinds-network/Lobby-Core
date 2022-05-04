@@ -19,13 +19,21 @@ class SelectServerForm implements Form {
 	}
 
 	public function handleResponse(Player $player, $data) : void {
-		if ($data === null) {
+		if($data === null){
 			return;
 		}
 
-		$servers = ['main', 'pt'];
+		$servers = ['main', 'pt', 'ltq'];
 		$this->database->deleteSelectServerData($player->getName());
-		$this->database->putSelectServerData(new UserSelectServerType($player->getName(), $servers[$data]));
+
+		if($servers[$data] !== end($servers)){
+			$this->database->putSelectServerData(new UserSelectServerType($player->getName(), $servers[$data]));
+			$player->queuedServer = $servers[$data];
+			$player->sendMessage("§l§5Joined the queue.");
+		}else{
+			$player->sendMessage("§l§7Left the queue.");
+			$player->queuedServer = "";
+		}
 	}
 
 	public function jsonSerialize() {
