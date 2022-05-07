@@ -30,7 +30,7 @@ class EventListener implements Listener {
 		$player = $event->getPlayer();
 		$name = $player->getName();
 		$player->clickRestrictionTime = microtime(true);
-		$player->moveEventRestrictionTime = mictotime(true);
+		$player->moveEventRestrictionTime = microtime(true);
 		$player->queuedServer = "";
 		$player->beforePosition = $player->getPosition();
 
